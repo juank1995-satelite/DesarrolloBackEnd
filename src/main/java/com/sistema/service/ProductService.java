@@ -11,4 +11,5 @@ public interface ProductService {
     Product update(Product product);
     Product updateStock(Long id, Integer quantityChange);
     void deleteLogically(Long id);
+    Product reactivate(Long id);
 }

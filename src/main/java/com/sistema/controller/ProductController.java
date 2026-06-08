@@ -7,6 +7,7 @@ import com.sistema.model.Product;
 import com.sistema.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import java.util.List;
@@ -70,7 +71,7 @@ public class ProductController {
      * Crear un nuevo Producto
      */
     @PostMapping
-    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
+    public ResponseEntity<ProductDTO> createProduct(@Valid @RequestBody ProductDTO productDTO) {
         Product entity = productMapper.toEntity(productDTO);
         Product created = productService.create(entity);
         return ResponseEntity.status(201).body(productMapper.toDto(created));
@@ -82,7 +83,7 @@ public class ProductController {
     @PutMapping("/{id}")
     public ResponseEntity<ProductDTO> updateProduct(
             @PathVariable Long id, 
-            @RequestBody ProductDTO productDTO) {
+            @Valid @RequestBody ProductDTO productDTO) {
         
         Product entity = productMapper.toEntity(productDTO);
         entity.setId(id); // Asegurarnos de que el ID coincida con la ruta
@@ -97,5 +98,14 @@ public class ProductController {
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteLogically(id);
         return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * Reactivar un Producto eliminado lógicamente
+     */
+    @PatchMapping("/{id}/reactivate")
+    public ResponseEntity<ProductDTO> reactivateProduct(@PathVariable Long id) {
+        Product reactivated = productService.reactivate(id);
+        return ResponseEntity.ok(productMapper.toDto(reactivated));
     }
 }

@@ -92,4 +92,16 @@ public class ProductServiceImpl implements ProductService {
         product.setActive(false);
         productRepository.save(product);
     }
+
+    @Override
+    @Transactional
+    public Product reactivate(Long id) {
+        // Utilizamos el findById original de JpaRepository porque nuestro findById() personalizado
+        // solo trae productos que tengan active=true, ¡y necesitamos encontrar el que está en false!
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("Producto no encontrado en la BD con ID: " + id));
+        
+        product.setActive(true);
+        return productRepository.save(product);
+    }
 }

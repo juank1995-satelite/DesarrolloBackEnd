@@ -115,7 +115,7 @@
                             <div class="form-container">
                                 <div class="field" style="margin-bottom: 1.5rem;">
                                     <p:outputLabel for="inlineName" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Nombre del Producto</p:outputLabel>
-                                    <p:inputText id="inlineName" value="#{productBean.selectedProduct.name}" required="true" style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid #cbd5e1;" placeholder="Ej. Taladro Eléctrico" />
+                                    <p:inputText id="inlineName" value="#{productBean.selectedProduct.name}" required="true" requiredMessage="El nombre del producto es obligatorio" style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid #cbd5e1;" placeholder="Ej. Taladro Eléctrico" />
                                 </div>
                                 <div class="field" style="margin-bottom: 1.5rem;">
                                     <p:outputLabel for="inlineDesc" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Descripción (Opcional)</p:outputLabel>
@@ -124,11 +124,11 @@
                                 <div style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem;">
                                     <div class="field" style="flex: 1;">
                                         <p:outputLabel for="inlinePrice" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Precio</p:outputLabel>
-                                        <p:inputNumber id="inlinePrice" value="#{productBean.selectedProduct.price}" symbol=" $" symbolPosition="s" decimalSeparator="." thousandSeparator="," style="width: 100%;" inputStyle="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid #cbd5e1;" placeholder="0.00" />
+                                        <p:inputNumber id="inlinePrice" value="#{productBean.selectedProduct.price}" required="true" requiredMessage="El precio es obligatorio" symbol=" $" symbolPosition="s" decimalSeparator="." thousandSeparator="," minValue="0" style="width: 100%;" inputStyle="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid #cbd5e1;" placeholder="0.00" />
                                     </div>
                                     <div class="field" style="flex: 1;">
                                         <p:outputLabel for="inlineStock" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Stock Inicial</p:outputLabel>
-                                        <p:spinner id="inlineStock" value="#{productBean.selectedProduct.stock}" min="0" style="width: 100%; display: block;" />
+                                        <p:spinner id="inlineStock" value="#{productBean.selectedProduct.stock}" min="0" required="true" requiredMessage="El stock es obligatorio" style="width: 100%; display: block;" />
                                     </div>
                                 </div>
                             </div>
@@ -155,7 +155,7 @@
                     <p:outputPanel rendered="#{not empty productBean.selectedProduct}">
                         <div class="field">
                             <p:outputLabel for="name">Nombre</p:outputLabel>
-                            <p:inputText id="name" value="#{productBean.selectedProduct.name}" required="true" />
+                            <p:inputText id="name" value="#{productBean.selectedProduct.name}" required="true" requiredMessage="El nombre del producto es obligatorio" />
                         </div>
                         <div class="field">
                             <p:outputLabel for="description">Descripción</p:outputLabel>
@@ -164,12 +164,12 @@
                         <div class="formgrid grid">
                             <div class="field col">
                                 <p:outputLabel for="price">Precio</p:outputLabel>
-                                <p:inputNumber id="price" value="#{productBean.selectedProduct.price}" symbol=" $"
-                                               symbolPosition="s" decimalSeparator="." thousandSeparator="," />
+                                <p:inputNumber id="price" value="#{productBean.selectedProduct.price}" required="true" requiredMessage="El precio es obligatorio" symbol=" $"
+                                               symbolPosition="s" decimalSeparator="." thousandSeparator="," minValue="0" />
                             </div>
                             <div class="field col">
                                 <p:outputLabel for="stock">Stock</p:outputLabel>
-                                <p:spinner id="stock" value="#{productBean.selectedProduct.stock}" min="0" />
+                                <p:spinner id="stock" value="#{productBean.selectedProduct.stock}" required="true" requiredMessage="El stock es obligatorio" min="0" />
                             </div>
                         </div>
                     </p:outputPanel>
